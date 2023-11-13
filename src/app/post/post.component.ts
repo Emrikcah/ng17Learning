@@ -23,7 +23,7 @@ import { PostListComponent } from '../post-list/post-list.component';
     <div>
       <app-post-list [fromPostParent]="postParentMessage"></app-post-list>
     </div>
-    <button (click)="sendMsg()" class="btn btn-neutral">Click</button>
+    <button (click)="sendMsg()" class="btn btn-neutral mr-4">Click</button>
   `,
   styles: [],
 })
@@ -49,6 +49,7 @@ export class PostComponent {
 
 
   /**Methods */
+  //used in app compo
   sendMsg(){
    this.messageEvent.emit(this.outPutChildMsg);
     

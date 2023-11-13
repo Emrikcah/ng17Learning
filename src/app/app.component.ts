@@ -40,6 +40,7 @@ export class AppComponent implements AfterContentChecked {
   //from post compo via @output
   fromPostOutput:string ='';
   
+  //for button in post compo
   showOutput:boolean = false;//controls visibility on click
 
   
