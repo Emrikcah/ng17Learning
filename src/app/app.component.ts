@@ -14,7 +14,7 @@ import { ClassbindingComponent } from './classbinding/classbinding.component';
   template: `
    <h1 class="text-2xl">App Component</h1>
    <h2>Share datt between child components to parent</h2>
-   <p>child to parent via @viewchild</p>
+   <p>child to parent via &#64;viewchild</p>
    <p>{{msgFromPostToAppCompo}}</p>
    
    

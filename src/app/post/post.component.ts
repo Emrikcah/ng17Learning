@@ -12,13 +12,13 @@ import { PostListComponent } from '../post-list/post-list.component';
       <h3>Share data between components</h3>
       <h4>{{ fromParent }}</h4>
 
-      <p class="text-red-400">Parent to child via @input decorator</p>
-      <p>Child to parent via @output decorator</p>
+      <p class="text-red-400">Parent to child via &#64;input decorator</p>
+      <p>Child to parent via &#64;output decorator</p>
       <p>
-        Child to parent when there is an Event, using @Output decorator and
+        Child to parent when there is an Event, using &#64;Output decorator and
         event emitter
       </p>
-      <p>And @viewchild</p>
+      <p>And &#64;viewchild</p>
     </div>
     <div>
       <app-post-list [fromPostParent]="postParentMessage"></app-post-list>
