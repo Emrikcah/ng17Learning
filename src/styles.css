@@ -2,3 +2,17 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+@layer components{
+
+    .hello{
+        @apply bg-red-300 text-green-800;
+    }
+
+}
+
+@layer base{
+    section{
+        @apply h-fit
+    }
+}

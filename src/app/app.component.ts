@@ -5,26 +5,39 @@ import {NavComponent} from './nav/nav.component'
 import { PostComponent } from './post/post.component';
 import { PropertybindingComponent } from './propertybinding/propertybinding.component';
 import { ClassbindingComponent } from './classbinding/classbinding.component';
+import { EventbindingComponent } from './eventbinding/eventbinding.component';
+import { TaskoneComponent } from './taskone/taskone.component';
+import { Task2Component } from './task2/task2.component';
+import { LearnpipesComponent } from './learnpipes/learnpipes.component';
+import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
+
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,NavComponent,PostComponent,PropertybindingComponent,ClassbindingComponent],
+  imports: [CommonModule, RouterOutlet,NavComponent,PostComponent,PropertybindingComponent,ClassbindingComponent,EventbindingComponent,TaskoneComponent,Task2Component,LearnpipesComponent,ReactiveformsComponent],
   template: `
    <h1 class="text-2xl">App Component</h1>
    <h2>Share datt between child components to parent</h2>
    <p>child to parent via &#64;viewchild</p>
    <p>{{msgFromPostToAppCompo}}</p>
+   <p class="text-6xl text-fuchsia-800">Stopped at: {{youTubeStopTime}} on youtube</p>
    
    
    <app-nav></app-nav>
    <!-- bind event emitter to post compo -->
-   <app-post [fromParent]='parentMessage' (messageEvent)="reciveMessage($event)"></app-post>
-   <p *ngIf="showOutput">{{fromPostOutput}}</p>
+   <app-post [fromParent]='parentMessage' (redcar)="reciveMessage($event)"></app-post>
+   <p class="text-pink-300" *ngIf="showOutput">{{fromPostOutput}}</p>
 
    <app-propertybinding></app-propertybinding>
    <app-classbinding></app-classbinding>
+   <app-eventbinding></app-eventbinding>
+   <app-taskone></app-taskone>
+   <app-task2></app-task2>
+   <app-learnpipes></app-learnpipes>
+   <app-reactiveforms/>
+   
 
    
    
@@ -32,6 +45,7 @@ import { ClassbindingComponent } from './classbinding/classbinding.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterContentChecked {
+  youTubeStopTime:string = '5:46:00';
   title = 'nglearning';
   //send to post compo
   parentMessage: string ="Message from the AppComponent thanks";
