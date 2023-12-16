@@ -1,150 +1,139 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  FormGroup,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import { IReactiveForm, ITemplateForm } from '../interfaces/itemplate-form';
+import {FormGroup,FormControl, ReactiveFormsModule, Validators} from '@angular/forms'
 
 @Component({
   selector: 'app-reactiveforms',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule,ReactiveformsComponent,ReactiveFormsModule],
   template: `
-    <section class="flex justify-center items-center flex-col ">
-      <h1 class="text-pink-700 text-5xl mb-6">Reactive Forms</h1>
-      <form
-        [formGroup]="form"
-        class="mb-2 space-y-3 flex flex-col items-center w-[400px]"
-      >
+  <div class="flex flex-col justify-center items-center ">
+    <h1 class="text-[#1dcdbc] text-6xl mb-5">Reactive Forms</h1>
+      <form [formGroup]="userForm" class="mb-2 space-y-3 flex flex-col items-center w-[800px]">
         <!-- input -->
-        <div class="w-full max-w-xs">
+        <div class="w-full max-w-4xl">
           <input
-            formControlName="fullName"
             type="text"
-            class="input input-bordered w-full max-w-xs "
-            name="fullname"
+            class="input input-bordered w-full  "
             placeholder="name"
+            formControlName='fullName'
+            [ngClass]="{
+              'border-red-500 mb-2':
+                userForm.controls.fullName.invalid && (FullName.dirty || FullName.touched)
+            }"
           />
-          @if(fullName.touched && fullName.invalid){
-          <div
-            role="alert"
-            class="alert alert-error h-4 flex justify-start items-center rounded-md"
-          >
-            @if (fullName.errors?.required){
-            <div>Full Name is required....</div>
-            }
-          </div>
+          <!-- error message -->
+          @if(userForm.controls['fullName'].touched && userForm.controls['fullName'].invalid){
+            <div role="alert" class="alert alert-error rounded-md ">
+                  <div *ngIf="FullName?.errors?.['required']">Your name is required</div>
+                  <div *ngIf="userForm.controls?.['fullName']?.errors?.['minlength']">Your name must be at least 5 characters</div>
+            </div>
           }
+          <!-- end error message -->
         </div>
         <!-- email -->
-        <div class="w-full max-w-xs">
+        <div class="w-full max-w-4xl">
           <input
-            formControlName="email"
             type="email"
-            class="input input-bordered w-full max-w-xs "
-            name="email"
+            class="input input-bordered w-full "
             placeholder="email"
+            formControlName='email'
+            [ngClass]="{
+              'border-red-500 mb-2':
+                Email.invalid && (Email.dirty || Email.touched)
+            }"
+
           />
+           <!-- error message -->
+           @if(userForm.controls['email'].touched && userForm.controls['email'].invalid){
+            <div role="alert" class="alert alert-error rounded-md ">
+                  <div *ngIf="Email?.errors?.['required']">Your email is required</div>
+                  <div *ngIf="userForm.controls?.['email']?.errors?.['email']">Invalid Email</div>
+            </div>
+          }
+          <!-- end error message -->
         </div>
         <!-- textarea -->
-        <div class="w-full max-w-xs">
+        <div class="w-full max-w-4xl">
           <textarea
-            formControlName="address"
-            class="textarea textarea-bordered w-full max-w-xs "
+            class="textarea textarea-bordered w-full "
             placeholder="address"
-            name="address"
             cols="40"
+            rows="10"
+            formControlName='address'
+            [ngClass]="{
+              'border-red-500 mb-2':
+                Address.invalid && (Address.dirty || Address.touched)
+            }"
+
           ></textarea>
+           <!-- error message -->
+           @if(Address.touched && Address.invalid){
+            <div role="alert" class="alert alert-error rounded-md ">
+                  <div *ngIf="userForm.controls?.['address']?.errors?.['required']">Your address is required</div>
+                 
+            </div>
+          }
+          <!-- end error message -->
         </div>
-
-        <!-- <button class="btn btn-outline" (click)="saveMe()">Save Data</button> -->
+        <button class="btn btn-accent btn-wide mt-5">Submit</button>
       </form>
-
-      <!-- @if(objArray?.length > 0){
-
-      <div class="overflow-x-auto">
-        <table class="table">
-          
-          <thead>
-            <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Address</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            
-            @for(user of objArray; track $index){
-
-            <tr>
-              <th>{{ $index + 1 }}</th>
-              <td>{{ user.name }}</td>
-              <td>{{ user.email }}</td>
-              <td>{{ user.address }}</td>
-              <td>
-                <button (click)="deleteMe($index)" class="btn btn-warning">
-                  Delete
-                </button>
-              </td>
-            </tr>
-            }
-          </tbody>
-        </table>
-      </div>
-      }@else {
-      <p class="text-3xl text-center">No Data to show!</p>
-      } -->
-    </section>
+  </div>
   `,
   styles: ``,
 })
 export class ReactiveformsComponent {
-  form: any;
 
+  userForm: any;
+  emailRegex: string ="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,}$"
   /**
    *
    */
   constructor() {
-    this.form = new FormGroup({
-      fullName: new FormControl('', [
-        Validators.required,
-        Validators.minLength(5),
+    //formgroup represents the controls
+    //connect this instance of formgroup to the form using userForm variable
+    this.userForm = new FormGroup({
+      fullName: new FormControl('',[
+        Validators.required,Validators.minLength(5)
       ]),
-      email: new FormControl(),
-      address: new FormControl(),
-    });
+      email: new FormControl('',[
+        Validators.required,//Validators.pattern(this.emailRegex),
+        Validators.email
+      ]),
+      address: new FormControl('',Validators.required),
+    })
+    
   }
+//Note: plz pay attention to the relationship the getters have with the properties in ngClass and the @if and ngIf statements
+  //without the getters the references fullName and email etc to a form control would not work. so getter gets the reference from formcontrolname?
+  //i would have to write the longhand form of  userForm.controls.email.invalid etc on ngClass
+  /**In reactive forms in Angular, the get method is commonly used to retrieve a reference to a specific form control or form group within your form. Specifically, the get method is used to access a FormControl or FormGroup instance within a FormGroup.
+   * 
+   * This get method is defining a getter named fullName. This getter is used to retrieve the FormControl associated with the "fullName" form control in the userForm FormGroup.
 
-  //properties
-  fullName: string = '';
-  email: string = '';
-  address: string = '';
+Here are a few reasons why you might use this approach:
 
-  
+Abstraction and Encapsulation:
 
-  // objArray: ITemplateForm[] = [];
+It provides an abstraction layer. Instead of accessing the form control directly throughout your component, you use fullName to get a reference to it. This can be beneficial for encapsulation and making your component's logic more modular.
+Readability and Maintainability:
 
-  getValue() {
-    console.log();
+It makes the code more readable and self-explanatory. If you need to make changes to how the form control is accessed or if you change the structure of your form, you only need to update it in one place (the get method).
+Consistency:
+
+It provides a consistent way to access form controls. If you have multiple places in your component where you need to access the "fullName" form control, using the get method ensures that you're always accessing it in the same way.
+   */
+  get FullName(){
+    return this.userForm.get("fullName");
   }
-  onSubmit() {
-    console.log();
+  get Email(){
+    return this.userForm.get("email");
   }
-  //delete data from the array on button click
-  // deleteMe(i: number) {
-  //   this.objArray.splice(i, 1);
-  // }
-  //push data onto an array
-  // saveMe() {
-  //   this.objArray.push({
-  //     fullName: this.fullName,
-  //     email: this.email,
-  //     address: this.address,
-  //   });
-  // }
+  get Address(){
+    return this.userForm.get("address");
+  }
 }
+
+
+//in template driven ngModel #fullName = 'ngModel' on the input is whats used to create a control instance
+/**In Angular's reactive forms, the name attribute on the HTML input element is not required. The primary identifier for form controls in reactive forms is the formControlName directive, which associates the input with a specific control in the form. */

@@ -13,6 +13,7 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
 
 
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -36,7 +37,9 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
    <app-taskone></app-taskone>
    <app-task2></app-task2>
    <app-learnpipes></app-learnpipes>
-   <app-reactiveforms/>
+   <app-reactiveforms></app-reactiveforms>
+   
+   
    
 
    
@@ -45,7 +48,7 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterContentChecked {
-  youTubeStopTime:string = '5:46:00';
+  youTubeStopTime:string = '5:57:00';
   title = 'nglearning';
   //send to post compo
   parentMessage: string ="Message from the AppComponent thanks";
