@@ -10,6 +10,7 @@ import { TaskoneComponent } from './taskone/taskone.component';
 import { Task2Component } from './task2/task2.component';
 import { LearnpipesComponent } from './learnpipes/learnpipes.component';
 import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component';
+import { RoutingComponent } from './routing/routing.component';
 
 
 
@@ -17,7 +18,7 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet,NavComponent,PostComponent,PropertybindingComponent,ClassbindingComponent,EventbindingComponent,TaskoneComponent,Task2Component,LearnpipesComponent,ReactiveformsComponent],
+  imports: [CommonModule, RouterOutlet,PostComponent,PropertybindingComponent,ClassbindingComponent,EventbindingComponent,TaskoneComponent,Task2Component,LearnpipesComponent,ReactiveformsComponent,NavComponent,RoutingComponent],
   template: `
    <h1 class="text-2xl">App Component</h1>
    <h2>Share datt between child components to parent</h2>
@@ -38,6 +39,7 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
    <app-task2></app-task2>
    <app-learnpipes></app-learnpipes>
    <app-reactiveforms></app-reactiveforms>
+   <app-routing></app-routing>
    
    
    
@@ -48,7 +50,7 @@ import { ReactiveformsComponent } from './reactiveforms/reactiveforms.component'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements AfterContentChecked {
-  youTubeStopTime:string = '5:57:00';
+  youTubeStopTime:string = '6:04:00';
   title = 'nglearning';
   //send to post compo
   parentMessage: string ="Message from the AppComponent thanks";
